@@ -1,0 +1,277 @@
+<!doctype html>
+<style>
+html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+}
+</style>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Zero Zone</title>
+    <link rel="icon" type="image/png" href="favicon-32x32.png"/>
+</head>
+
+<style>
+    @import url(https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css);
+
+    body{
+        background-color: rgb(132, 132, 205);
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+    
+    .bg{
+        position:relative;
+        height: 100%;
+        width:100%;
+    }
+    
+    .bg img{
+        height: 100%;
+        width:100%;
+        position:absolute;
+        top: 0;
+        left:0;
+        right:0;
+        bottom:0;
+        margin:auto;
+        overflow: hidden;
+        object-fit: cover;
+    }
+
+    .term{
+        height: 96%;
+        width: 98%;
+        background: rgba(70, 70, 109, 0.7);
+        border-style: solid;
+        border-color: rgba(255, 182, 193, 0.9);
+        border-width: 2px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow:hidden;
+    }
+
+    p{
+        color: white;
+        font-family: 'Fira Code', monospace;
+        margin-top: 0; margin-bottom: 0;
+
+    }
+
+    .fetch-table{
+        table-layout: fixed ;
+        margin: 50px;
+    }
+    
+    .navbar{
+        margin: 20px;
+        margin-left: 50px;
+        font-size: 25px;
+        color: #DCB57E;
+        font-family: 'Fira Code', monospace;
+    }
+
+    .fetch-1{
+        max-height: 255px;
+        max-width: 255px;
+
+
+    }
+
+
+    .fetch{
+        color: rgb(255, 182, 193);
+        font-family: 'Fira Code', monospace;
+        margin-top: 0; margin-bottom: 0;
+        font-size: 35px;
+        margin-left: 45px;
+    }
+
+    .b-fetch{
+        color: rgb(255, 141, 158);
+    }
+
+
+    .prompt{
+        color: white;
+        font-family: 'Fira Code', monospace;
+        margin-top: 0; margin-bottom: 0;
+        display:inline;
+        font-size: 35px;
+    }
+    
+    a {
+        font-family: 'Fira Code', monospace;
+        color: #DCB57E;
+        text-align: center;
+        text-decoration: none;
+        font-size: 35px;
+
+    }
+    
+    a:hover{
+      color: #FFE2B8;
+    }
+    
+    .htop{
+        color: #B8FFE2;
+        margin: 15px;
+        margin-left: 50px;
+        margin-right: 50px;
+        word-wrap    : break-word;
+        overflow-wrap: break-word;
+        font-size: 25px;
+    }
+    
+    .htop > b {
+        color: #7EDCB5;
+    }
+
+
+</style>
+
+<body>
+    
+    <div class="bg"><img src="img/bg3.jpg"></div>
+
+    <div class="term">
+        <table class="fetch-table">
+            <tr>
+                <td class="fetch-1">
+                    <div class="fetch-img">
+                        <img src="img/girl.jpg" style="width: 100%; height: 100%">
+                    </div>
+                </td>
+                <td class="fetch-2">
+                    <div class="fetch" id="nameinfo"><b class="b-fetch" id="name"></b></div>
+                    <div class="fetch" id="infoinfo"><b class="b-fetch" id="info"></b></div>
+                    <div class="fetch" id="ageinfo"><b class="b-fetch" id="age"></b></div>
+                </td>
+            </tr>        
+        </table>
+        <div class="navbar">
+            <a href="#" onclick="cd('home')" id="home" class="navi">Home&gt; </a><a href="#" onclick="cd('contact')" id="contact" class="navi">Contact&gt; </a><a href="#" onclick="cd('about')" id="about" class="navi">About&gt; </a>
+        </div>
+        <div class="navbar">
+            <div class="prompt" style="color: deepskyblue">[</div><div class="prompt" style="color: red">zion</div><div  class="prompt" style="color: yellow">@</div><div class="prompt" style="color: greenyellow">zone</div><div  class="prompt"style="color: deepskyblue">]</div><div class="prompt" id="ps1" style="color: #7EDCB5;"></div><div class="prompt" id="ps2"></div>
+            
+              
+        </div>
+        
+        <div class="htop" id="htop">
+            
+        </div>
+    </div>
+    
+    <script>
+        var abort = false;
+        var h1 = "Name:";
+        var h2 = "Info:";
+        var h3 = "Age:";
+        var h1s = " Zone";
+        var h2s = " Not web developer";
+        var h3s = " 23";
+        
+        var h1len = h1.length + h1s.length;
+        var h2len = h2.length + h2s.length;
+        var h3len = h3.length + h3s.length;
+        
+        var speed = 50;
+        var time1 = h1.length * speed;
+        var time2 = h1len * speed;
+        var time3 = time2 + h2.length * speed;
+        var time4 = (h1len + h2len) * speed;
+        var time5 = time4 + h3.length * speed;
+
+        
+        
+        function neofetch(){
+            typeWriter("name", h1, speed);
+            setTimeout(function(){ typeWriter("nameinfo", h1s, speed); }, time1);
+            setTimeout(function(){ typeWriter("info", h2, speed); }, time2);
+            setTimeout(function(){ typeWriter("infoinfo", h2s, speed); }, time3);
+            setTimeout(function(){ typeWriter("age", h3, speed); }, time4);
+            setTimeout(function(){ typeWriter("ageinfo", h3s, speed); }, time5);
+        }
+                
+        function typeWriter(elem_id, txt, speed=50, i=0) {
+            if (i < txt.length) {
+                document.getElementById(elem_id).innerHTML += txt.charAt(i);
+                setTimeout(function(){ typeWriter(elem_id, txt, speed, i+1) }, speed);
+            }
+        }
+        
+        function replaceWriter(elem_id, txt, speed=50, i=0){
+            if (i < txt.length && !abort) {
+                document.getElementById(elem_id).innerHTML = txt.charAt(i);
+                setTimeout(function(){ replaceWriterHelper(elem_id, txt, speed, i+1) }, speed);
+            }
+        }
+        function replaceWriterHelper(elem_id, txt, speed=50, i=0){
+            if (i < txt.length && !abort) {
+                document.getElementById(elem_id).innerHTML += txt.charAt(i);
+                setTimeout(function(){ replaceWriterHelper(elem_id, txt, speed, i+1) }, speed);
+            }
+        }
+        
+        
+        function cd(htop_menu){
+            var ps1 = document.getElementById("ps1");
+            var ps2 = document.getElementById("ps2");            
+            var nav_menu = document.getElementById(htop_menu);
+            var htop = document.getElementById("htop");
+            var nav_bar = document.getElementsByClassName("navi");
+            
+            var home_txt =  "Welcome! To my Zone.";
+            var contact_txt = "Email: a@a.com";
+            var about_txt = "I am root.";
+            var htop_speed = 5;
+            
+            if(htop_menu === "home"){
+                ps1.innerHTML = " Home:";
+                ps2.innerHTML = "$";
+                abort = true;
+                setTimeout(function(){ 
+                    abort = false;
+                    replaceWriter("htop", home_txt, htop_speed);
+                }, 100);
+
+            }
+            else if(htop_menu === "contact"){
+                ps1.innerHTML = " Contact:";
+                ps2.innerHTML = "$";
+                abort = true;
+                setTimeout(function(){ 
+                    abort = false;
+                    replaceWriter("htop", contact_txt, htop_speed);
+                }, 100);
+            }
+            else{
+                ps1.innerHTML = " About:";
+                ps2.innerHTML = "$";
+                abort = true;
+                setTimeout(function(){ 
+                    abort = false;
+                    replaceWriter("htop", about_txt, htop_speed);
+                }, 100);
+            }
+            
+            for(var i = 0; i < nav_bar.length; i++){
+                nav_bar[i].style = "display: inline";
+            }
+            nav_menu.style = "color: currentColor; cursor: default; opacity: 0.5; text-decoration: none; pointer-events: none;";
+        }
+        neofetch();
+        cd("home");
+    </script>
+    
+</body>
+</html>
